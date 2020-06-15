@@ -12,6 +12,7 @@ public class RedisSinkConfig extends AbstractConfig {
     public static final String USE_RECORD_KEY = "use.record.key";
     public static final String REDIS_KEY_FIELDS = "redis.key.fields";
     public static final String KEY_DELIMITER = "redis.key.delimiter";
+    public static final String REDIS_KEY_PREFIX = "redis.key.prefix";
     public static final String TABLE = "redis.table";
     public static final String REDIS_HOSTS = "redis.connection.hosts";
     public static final String TIMEOUT = "redis.connection.timeout";
@@ -29,6 +30,7 @@ public class RedisSinkConfig extends AbstractConfig {
     public final Integer timeout;
     public final String password;
     public final Integer dbNum;
+    public final String redisKeyPrefix;
 
 
     public RedisSinkConfig(Map<String, String> props) {
@@ -43,6 +45,7 @@ public class RedisSinkConfig extends AbstractConfig {
         timeout = getInt(TIMEOUT);
         password = getString(PASSWORD);
         dbNum = getInt(DB_NUMBER);
+        redisKeyPrefix = getString(REDIS_KEY_PREFIX);
     }
 
     public static ConfigDef CONFIG_DEF = new ConfigDef()
@@ -94,6 +97,15 @@ public class RedisSinkConfig extends AbstractConfig {
                     5,
                     ConfigDef.Width.MEDIUM,
                     "Redis Primary Key Delimiter")
+            .define(REDIS_KEY_PREFIX,
+                    ConfigDef.Type.STRING,
+                    null,
+                    ConfigDef.Importance.LOW,
+                    "Prefix of Redis key.",
+                    "redis.connect.connection.config",
+                    3,
+                    ConfigDef.Width.LONG,
+                    "Redis Key Prefix")
             .define(DB_NUMBER,
                     ConfigDef.Type.INT,
                     0,
