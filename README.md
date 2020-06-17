@@ -165,6 +165,7 @@ Connector uses Redis `"hmset redisKey subKey subValue subKey1 subValue1"` comman
 |use.record.key| If it is true, Kafka record key is used as Redis key. Otherwise, **redis.key.fields** property is used to decide Redis key. | boolean | true | true<br/>false
 |redis.key.fields| Fields to decide Redis key from record value. For multiple fields, set this value as **field1:field2** format. This option is used by writers when **use.record.key** is false. | string | none | none
 |redis.key.delimiter| Delimiter for selected multiple fields for Redis key. | string | . | any string values
+|redis.key.prefix| A prefix value for Redis key. | string | null | any string values
 |redis.table  | If you use **'hash_value'** to save data to Redis, you must specify the table name. This represents key in the Redis. Generated Redis records from received Kafka records will be saved under the this table. | String | sinkTable | any string values
 |redis.connection.hosts| Host and port information to connect to the Redis. It must be as **host:port** format. If there is more than one host(e.g redis sentinel), it must be as **host:port,host1:port1** format. | string | localhost:6379 | none
 |redis.connection.timeout| Maximum time to connect to the Redis. | int | 2000 | none
@@ -183,6 +184,7 @@ redis.writer=cache
 redis.type=standalone
 use.record.key=false
 #redis.key.fields=fieldName
+#redis.key.prefix=PRODUCT:
 #redis.key.delimiter=,
 #redis.table=tbl
 redis.connection.hosts=localhost:6379

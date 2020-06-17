@@ -37,10 +37,11 @@ public abstract class RedisWriter {
     }
 
     private void createRecordConverter(RedisSinkConfig config) {
+        String redisKeyPrefix = config.redisKeyPrefix;
         String specifiedKeyFieldNames = config.keyFieldNames;
         String keyDelimiter = config.keyDelimiter;
         boolean useRecordKeyAsRedisKey = config.useRecordKeyAsRedisKey;
-        this.recordConverter = new RecordConverter(specifiedKeyFieldNames, keyDelimiter, useRecordKeyAsRedisKey);
+        this.recordConverter = new RecordConverter(redisKeyPrefix, specifiedKeyFieldNames, keyDelimiter, useRecordKeyAsRedisKey);
     }
 
     protected RedisClient getRedisClient() {
